@@ -6,7 +6,8 @@ module Codemeta
   # @See https://schema.org/SoftwareSourceCode
   class SoftwareSourceCode < SchemaDotOrg::SchemaType
     attr_accessor :code_repository, :code_sample_type, :programming_language,
-                  :runtime_platform, :target_product
+                  :runtime_platform, :target_product, :about, :abstract,
+                  :access_mode, :access_mode_sufficient, :accessibility_api
 
     # Properties from SoftwareSourceCode
 
@@ -28,6 +29,28 @@ module Codemeta
     # Target Operating System / Product to which the code applies. If applies
     # to several versions, just the product name can be used.
     validates :target_product, type: String, allow_nil: true
+
+    # Properties from CreativeWork
+
+    # The subject matter of the content. Inverse property: subjectOf.
+    validates :about, type: Codemeta::Thing, allow_nil: true
+
+    # An abstract is a short description that summarizes a CreativeWork.
+    validates :abstract, type: String, allow_nil: true
+
+    # The human sensory perceptual system or cognitive faculty through which
+    # a person may process or perceive information. Values should be drawn
+    # from the approved vocabulary.
+    validates :access_mode, type: String, allow_nil: true
+
+    # A list of single or combined accessModes that are sufficient to
+    # understand all the intellectual content of a resource. Values should
+    # be drawn from the approved vocabulary.
+    validates :access_mode_sufficient, type: Array, allow_nil: true
+
+    # Indicates that the resource is compatible with the referenced 
+    # accessibility API. Values should be drawn from the approved vocabulary.
+    validates :accessibility_api, type: String, allow_nil: true
 
     def _to_json_struct
       {
