@@ -16,3 +16,6 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.md']
   s.license = 'MIT'
   s.required_ruby_version = '>= 2.7.0'
+
+  s.add_dependency 'cff', '~> 1.0', '>= 1.0.1'
+end
