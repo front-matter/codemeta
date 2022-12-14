@@ -1,0 +1,32 @@
+name: Build Ruby Gem
+
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.7
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7.x
+
+    - name: Build and test
+      run: |
+        gem install bundler
+        bundle install
+        bundle exec rspec
+        
+    - name: Notify Slack
+      uses: adamkdean/simple-slack-notify@1.0.4
+      with:
+        channel: '#ops'
+        username: 'GitHub Actions'
+        color: 'good'
+        text: 'A new version of the codemeta gem has been built.'
+
