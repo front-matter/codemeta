@@ -18,4 +18,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.7.0'
 
   s.add_dependency 'cff', '~> 1.0', '>= 1.0.1'
+
+  s.add_development_dependency 'simplecov', '0.21.2'
 end
