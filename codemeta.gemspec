@@ -21,10 +21,16 @@ Gem::Specification.new do |s|
   s.metadata['rubygems_mfa_required'] = 'true'
 
   s.add_dependency 'cff', '~> 1.0', '>= 1.0.1'
+  s.add_dependency 'schema_dot_org', '~> 1.7', '>= 1.7.1'
 
+  s.add_development_dependency 'bundler', '~> 2'
+  s.add_development_dependency 'rake', '>= 12.3.3'
   s.add_development_dependency 'rspec', '~> 3.4'
   s.add_development_dependency 'rubocop', '~> 1.40'
   s.add_development_dependency 'rubocop-performance', '~> 1.15'
   s.add_development_dependency 'rubocop-rspec', '~> 2.13'
   s.add_development_dependency 'simplecov', '0.21.2'
+  s.add_development_dependency 'sorbet', '>= 0.5.5890'
+
+  s.add_runtime_dependency 'sorbet-runtime', '>= 0.5.5890'
 end
