@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop-performance', '~> 1.15'
   s.add_development_dependency 'rubocop-rspec', '~> 2.13'
   s.add_development_dependency 'simplecov', '0.21.2'
+  s.add_development_dependency 'simplecov_json_formatter', '~> 0.1.2'
   s.add_development_dependency 'sorbet', '>= 0.5.5890'
 
   s.add_runtime_dependency 'sorbet-runtime', '>= 0.5.5890'

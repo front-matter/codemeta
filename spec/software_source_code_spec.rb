@@ -2,9 +2,8 @@
 # typed: ignore
 
 require 'spec_helper'
-require 'codemeta/software_source_code'
 
-SoftwareSourceCode = Codemeta::SoftwareSourceCode
+SoftwareSourceCode = ::Codemeta::SoftwareSourceCode
 
 RSpec.describe SoftwareSourceCode do
   describe '#new' do

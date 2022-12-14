@@ -2,6 +2,13 @@
 # typed: strict
 
 require 'bundler/setup'
+Bundler.setup
+
+require 'simplecov'
+require 'simplecov_json_formatter'
+SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+SimpleCov.start
+
 require 'codemeta'
 
 RSpec.configure do |config|

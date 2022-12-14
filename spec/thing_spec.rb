@@ -2,7 +2,6 @@
 # typed: ignore
 
 require 'spec_helper'
-require 'codemeta/thing'
 
 Thing = Codemeta::Thing
 

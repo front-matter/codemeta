@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Codemeta
-  # Model the Schema.org `Thing > CreativeWork > SoftwareSourceCode`.
+  # Model Schema.org `Thing > CreativeWork > SoftwareSourceCode`.
   # @See https://schema.org/SoftwareSourceCode
   class SoftwareSourceCode < SchemaDotOrg::SchemaType
     attr_accessor :code_repository, :code_sample_type, :programming_language,
@@ -75,6 +75,7 @@ module Codemeta
     # are present and no long descriptions are needed."
     validates :accessibility_summary, type: String, allow_nil: true
 
+    # rubocop:disable Metrics/MethodLength
     def _to_json_struct
       {
         'code_repository' => code_repository,
@@ -93,5 +94,6 @@ module Codemeta
         'accessibility_summary' => accessibility_summary
       }
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

@@ -99,6 +99,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.15)
   rubocop-rspec (~> 2.13)
   simplecov (= 0.21.2)
+  simplecov_json_formatter (~> 0.1.2)
   sorbet (>= 0.5.5890)
 
 BUNDLED WITH
