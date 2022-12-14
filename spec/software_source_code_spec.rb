@@ -3,7 +3,7 @@
 
 require 'spec_helper'
 
-SoftwareSourceCode = ::Codemeta::SoftwareSourceCode
+SoftwareSourceCode = Codemeta::SoftwareSourceCode
 
 RSpec.describe SoftwareSourceCode do
   describe '#new' do

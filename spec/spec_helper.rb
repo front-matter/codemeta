@@ -10,6 +10,11 @@ SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 SimpleCov.start
 
 require 'codemeta'
+require 'codemeta/action'
+require 'codemeta/software_source_code'
+require 'codemeta/thing'
+require 'codemeta/url'
+require 'codemeta/version'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

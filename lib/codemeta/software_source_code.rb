@@ -9,7 +9,11 @@ module Codemeta
                   :runtime_platform, :target_product, :about, :abstract,
                   :access_mode, :access_mode_sufficient, :accessibility_api,
                   :accessibility_control, :accessibility_feature,
-                  :accessibility_hazard, :accessibility_summary
+                  :accessibility_hazard, :accessibility_summary,
+                  :additional_type, :alternate_name, :description,
+                  :disambiguating_description, :identifier, :image,
+                  :main_entity_of_page, :name, :potentialAction, :same_as,
+                  :subject_of, :url
 
     # Properties from SoftwareSourceCode
 
@@ -75,7 +79,61 @@ module Codemeta
     # are present and no long descriptions are needed."
     validates :accessibility_summary, type: String, allow_nil: true
 
-    # rubocop:disable Metrics/MethodLength
+    # Properties from Thing
+
+    # An additional type for the item, typically used for adding more specific
+    # types from external vocabularies in microdata syntax. This is a
+    # relationship between something and a class that the thing is in. In RDFa
+    # syntax, it is better to use the native RDFa syntax - the 'typeof'
+    # attribute - for multiple types. Schema.org tools may have only weaker
+    # understanding of extra types, in particular those defined externally.
+    validates :additional_type, type: Codemeta::URL, allow_nil: true
+
+    # An alias for the item.
+    validates :alternate_name, type: String, allow_nil: true
+
+    # A description of the item.
+    validates :description, type: String, allow_nil: true
+
+    # A sub property of description. A short description of the item used
+    # to disambiguate from other, similar items. Information from other
+    # properties (in particular, name) may be necessary for the description
+    # to be useful for disambiguation.
+    validates :disambiguating_description, type: String, allow_nil: true
+
+    # The identifier property represents any kind of identifier for any kind
+    #  of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+    # dedicated properties for representing many of these, either as textual
+    # strings or as URL (URI) links. See background notes for more details.
+    validates :identifier, type: Codemeta::URL, allow_nil: true
+
+    # An image of the item. This can be a URL or a fully described ImageObject.
+    validates :image, type: Codemeta::URL, allow_nil: true
+
+    # Indicates a page (or other CreativeWork) for which this thing is the main
+    # entity being described. See background notes for details.
+    # Inverse property: mainEntity
+    validates :main_entity_of_page, type: Codemeta::URL, allow_nil: true
+
+    # The name of the item.
+    validates :name, type: String, allow_nil: true
+
+    # Indicates a potential Action, which describes an idealized action in
+    #  which this thing would play an 'object' role.
+    validates :potentialAction, type: Codemeta::Action, allow_nil: true
+
+    # URL of a reference Web page that unambiguously indicates the item's
+    # identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
+    # or official website.
+    validates :same_as, type: Codemeta::URL, allow_nil: true
+
+    # A CreativeWork or Event about this Thing. Inverse property: about
+    validates :subject_of, type: SchemaDotOrg::CreativeWork, allow_nil: true
+
+    # URL of the item.
+    validates :url, type: Codemeta::URL, allow_nil: true
+
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def _to_json_struct
       {
         'code_repository' => code_repository,
@@ -91,9 +149,21 @@ module Codemeta
         'accessibility_control' => accessibility_control,
         'accessibility_feature' => accessibility_feature,
         'accessibility_hazard' => accessibility_hazard,
-        'accessibility_summary' => accessibility_summary
+        'accessibility_summary' => accessibility_summary,
+        'additional_type' => additional_type.to_json_struct,
+        'alternate_name' => alternate_name,
+        'description' => description,
+        'disambiguating_description' => disambiguating_description,
+        'identifier' => identifier.to_json_struct,
+        'image' => image.to_json_struct,
+        'main_entity_of_page' => main_entity_of_page.to_json_struct,
+        'name' => name,
+        'potentialAction' => potentialAction.to_json_struct,
+        'same_as' => same_as.to_json_struct,
+        'subject_of' => subject_of.to_json_struct,
+        'url' => url.to_json_struct
       }
     end
-    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
   end
 end
