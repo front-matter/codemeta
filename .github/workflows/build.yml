@@ -21,12 +21,3 @@ jobs:
         gem install bundler
         bundle install
         bundle exec rspec
-        
-    - name: Notify Slack
-      uses: adamkdean/simple-slack-notify@1.0.4
-      with:
-        channel: '#ops'
-        username: 'GitHub Actions'
-        color: 'good'
-        text: 'A new version of the codemeta gem has been built.'
-
