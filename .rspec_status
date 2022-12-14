@@ -1,4 +1,4 @@
 example_id                                 | status | run_time        |
 ------------------------------------------ | ------ | --------------- |
-./spec/software_source_code_spec.rb[1:1:1] | passed | 0.0031 seconds  |
-./spec/thing_spec.rb[1:1:1]                | passed | 0.00009 seconds |
+./spec/software_source_code_spec.rb[1:1:1] | passed | 0.00304 seconds |
+./spec/thing_spec.rb[1:1:1]                | passed | 0.00007 seconds |

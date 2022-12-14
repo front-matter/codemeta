@@ -8,6 +8,7 @@ SoftwareSourceCode = Codemeta::SoftwareSourceCode
 
 RSpec.describe SoftwareSourceCode do
   describe '#new' do
+    # rubocop:disable RSpec/ExampleLength
     it 'creates correct json without optional attributes' do
       source_code = described_class.new(
         code_repository: 'https://github.com/front-matter/codemeta',
@@ -20,5 +21,6 @@ RSpec.describe SoftwareSourceCode do
         'code_sample_type' => 'full solution'
       )
     end
+    # rubocop:enable RSpec/ExampleLength
   end
 end
