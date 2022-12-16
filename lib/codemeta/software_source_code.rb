@@ -18,6 +18,8 @@ module Codemeta
     # solutions, code snippet samples, scripts, templates.
     attr_reader :type
 
+    attr_accessor :id
+
     # The open standard reference for interpreting the markup contents.
     attr_reader :context
 
@@ -359,6 +361,9 @@ module Codemeta
     # which this thing would play an 'object' role.
     attr_accessor :potential_action
 
+    # The publisher of the creative work.
+    attr_accessor :publisher
+
     # URL of a reference Web page that unambiguously indicates the item's
     # identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
     # or official website.
@@ -392,12 +397,23 @@ module Codemeta
                args
              end
 
+      meta['@id'] = normalize_id(meta['id'] || meta['identifier'])
+
       # raise error if context is other than codemeta, schema.org, or nil
-      unless ['http://schema.org', 'https://doi.org/10.5063/schema/codemeta-2.0',
-              nil].include?(meta['@context'])
+      unless [
+        'http://schema.org', 
+        'https://doi.org/10.5063/schema/codemeta-2.0',
+        'https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld',
+        nil].include?(meta['@context'])
         raise ArgumentError, "Invalid context: #{meta['@context']}"
       end
 
+      # raise error if type is other than SoftwareSourceCode, or nil
+      unless ['SoftwareSourceCode', nil].include?(meta['@type'])
+        raise ArgumentError, "Invalid type: #{meta['@type']}"
+      end
+
+      @id = meta['@id']
       @type = 'SoftwareSourceCode'
       @context = 'http://schema.org'
       @about = meta['about']
@@ -410,10 +426,12 @@ module Codemeta
       @date_modified = meta['date_modified']
       @date_published = meta['date_published']
       @description = meta['description']
+      @identifier = meta['identifier']
       @keywords = meta['keywords']
       @license = meta['license']
       @name = meta['name']
       @programming_language = meta['programming_language']
+      @publisher = meta['publisher']
       @runtime_platform = meta['runtime_platform']
       @size = meta['size']
       @version = meta['version']
@@ -422,6 +440,7 @@ module Codemeta
     # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def to_json_struct
       {
+        '@id' => id,
         '@type' => type,
         '@context' => context,
         'codeRepository' => code_repository,
@@ -450,6 +469,7 @@ module Codemeta
         'mainEntityOfPage' => main_entity_of_page,
         'name' => name,
         'potentialAction' => potential_action,
+        'publisher' => publisher,
         'sameAs' => same_as,
         'size' => size,
         'subject_of' => subject_of,
