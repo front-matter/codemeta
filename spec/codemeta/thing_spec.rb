@@ -1,11 +1,8 @@
 # frozen_string_literal: true
-# typed: ignore
 
 require 'spec_helper'
 
-Thing = Codemeta::Thing
-
-RSpec.describe Thing do
+RSpec.describe Codemeta::Thing do
   describe '#new' do
     it 'creates correct json without optional attributes' do
       thing = described_class.new(name: 'Schema.org Ontology')

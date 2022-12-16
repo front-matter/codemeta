@@ -1,18 +1,24 @@
-# typed: ignore
 # frozen_string_literal: true
 
 module Codemeta
   # Model Schema.org `DataType > Text > URL`.
   # @See https://schema.org/URL
-  class URL < SchemaDotOrg::SchemaType
-    attr_accessor :url
+  class URL
+    # @dynamic url
+
+    attr_reader :type
 
     # URL of the item.
-    validates :url, type: Codemeta::Thing, presence: true
+    attr_accessor :url
 
-    def _to_json_struct
+    def initialize(args = {})
+      @type = 'URL'
+      @url = args[:url]
+    end
+
+    def to_json_struct
       {
-        'url' => url.to_json_struct
+        'url' => url
       }
     end
   end

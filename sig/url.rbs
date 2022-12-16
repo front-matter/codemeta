@@ -1,0 +1,3 @@
+class URL
+  @url: String
+end
