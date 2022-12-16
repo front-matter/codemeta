@@ -380,6 +380,9 @@ module Codemeta
     # The version of the CreativeWork embodied by a specified resource.
     attr_accessor :version
 
+    # other public methods
+    attr_accessor :authors
+
     def initialize(args = {})
       args.transform_keys! { |k| k.to_s }
 
@@ -407,9 +410,11 @@ module Codemeta
       @date_modified = meta['date_modified']
       @date_published = meta['date_published']
       @description = meta['description']
+      @keywords = meta['keywords']
       @license = meta['license']
       @name = meta['name']
       @programming_language = meta['programming_language']
+      @runtime_platform = meta['runtime_platform']
       @size = meta['size']
       @version = meta['version']
     end
@@ -435,11 +440,12 @@ module Codemeta
         'accessibilitySummary' => accessibility_summary,
         'additionalType' => additional_type,
         'alternateName' => alternate_name,
-        'author' => author,
+        'authors' => authors,
         'description' => description,
         'disambiguatingDescription' => disambiguating_description,
         'identifier' => identifier,
         'image' => image,
+        'keywords' => keywords,
         'license' => license,
         'mainEntityOfPage' => main_entity_of_page,
         'name' => name,
@@ -450,6 +456,16 @@ module Codemeta
         'url' => url,
         'version' => version
       }.compact
+    end
+
+    def authors
+      Array.wrap(author).map do |a|
+        { '@type' => a['@type'],
+          '@id' => a['@id'],
+          'affiliation' => a['affiliation'],
+          'familyName' => a['familyName'],
+          'givenName' => a['givenName'] }.compact
+      end.presence
     end
     # rubocop:enable Metrics/ClassLength, Metrics/MethodLength, Metrics/AbcSize
   end
