@@ -1,0 +1,147 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "EddyCleanR",
+  "description": "This package provides functions to filter and gap fill eddy covariance data to calcuate evapotranspiration (et) values. The International Rice Research Institute (IRRI) uses it to calculate irrigation needs for the Ecological Intensification research platform.",
+  "name": "EddyCleanR: Functions to Filter and Gap Fill Eddy Covariance Data and Calculate et Values",
+  "codeRepository": "https://github.com/adamhsparks/EddyCleanR",
+  "issueTracker": "https://github.com/adamhsparks/EddyCleanR/issues",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "1.2.2",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.2.2 (2022-10-31)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Adam",
+      "familyName": "Sparks",
+      "email": "adamhsparks@gmail.com",
+      "@id": "https://orcid.org/0000-0002-0061-8359"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Adam",
+      "familyName": "Sparks",
+      "email": "adamhsparks@gmail.com",
+      "@id": "https://orcid.org/0000-0002-0061-8359"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.0.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "pracma",
+      "name": "pracma",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=pracma"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "purrr",
+      "name": "purrr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=purrr"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "zoo",
+      "name": "zoo",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=zoo"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "lubridate",
+      "name": "lubridate",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lubridate"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "16.529KB",
+  "citation": [
+    {
+      "@type": "SoftwareSourceCode",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Adam",
+          "familyName": "Sparks"
+        }
+      ],
+      "name": "{EddyCleanR}: Functions to filter and gap fill eddy covariance data and calculate et values",
+      "url": "https://github.com/adamhsparks/EddyCleanR",
+      "description": "R package version 1.2.2"
+    }
+  ],
+  "readme": "https://github.com/adamhsparks/EddyCleanR/blob/main/README.md",
+  "contIntegration": "https://github.com/adamhsparks/EddyCleanR/actions",
+  "developmentStatus": "https://www.repostatus.org/#inactive",
+  "keywords": [
+    "eddycovariance",
+    "eddy-covariance-data",
+    "rice-crops",
+    "maize-crops",
+    "corn-crops",
+    "outlier-removal",
+    "filtering",
+    "filter",
+    "evapotranspiration",
+    "irrigation",
+    "statistics",
+    "mungbean-crops",
+    "calculations",
+    "rice-production",
+    "maize-production",
+    "tropical-agriculture",
+    "agronomy"
+  ]
+}

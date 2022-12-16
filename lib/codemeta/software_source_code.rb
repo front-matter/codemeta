@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
+require_relative 'utils'
+
 module Codemeta
   # Model Schema.org `Thing > CreativeWork > SoftwareSourceCode`.
   # @See https://schema.org/SoftwareSourceCode
 
   # rubocop:disable Metrics/ClassLength
   class SoftwareSourceCode
+    include Codemeta::Utils
+
     # @dynamic code_repository, code_sample_type, programming_language,
 
     # Properties from SoftwareSourceCode
@@ -363,13 +367,28 @@ module Codemeta
     # URL of the item.
     attr_accessor :url
 
+    # The version of the CreativeWork embodied by a specified resource.
+    attr_accessor :version
+
     def initialize(args = {})
+      args.transform_keys!(&:to_sym)
+
+      if args[:input]
+        meta = read_input(args[:input]).merge(args)
+      else
+        meta = args
+      end
+
       @type = 'SoftwareSourceCode'
-      @about = args[:about]
-      @abstract = args[:abstract]
-      @access_mode = args[:access_mode]
-      @code_repository = args[:code_repository]
-      @code_sample_type = args[:code_sample_type]
+      @about = meta[:about]
+      @abstract = meta[:abstract]
+      @access_mode = meta[:access_mode]
+      @author = meta[:author]
+      @code_repository = meta[:code_repository]
+      @code_sample_type = meta[:code_sample_type]
+      @name = meta[:name]
+      @programming_language = meta[:programming_language]
+      @version = meta[:version]
     end
 
     # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -392,6 +411,7 @@ module Codemeta
         'accessibilitySummary' => accessibility_summary,
         'additionalType' => additional_type,
         'alternateName' => alternate_name,
+        'author' => author,
         'description' => description,
         'disambiguatingDescription' => disambiguating_description,
         'identifier' => identifier,
@@ -401,7 +421,8 @@ module Codemeta
         'potentialAction' => potential_action,
         'sameAs' => same_as,
         'subject_of' => subject_of,
-        'url' => url
+        'url' => url,
+        'version' => version,
       }.compact
     end
     # rubocop:enable Metrics/ClassLength, Metrics/MethodLength, Metrics/AbcSize
