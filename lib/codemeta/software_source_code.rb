@@ -386,6 +386,10 @@ module Codemeta
       @author = meta[:author]
       @code_repository = meta[:code_repository]
       @code_sample_type = meta[:code_sample_type]
+      @date_created = meta[:date_created]
+      @date_modified = meta[:date_modified]
+      @date_published = meta[:date_published]
+      @license = meta[:license]
       @name = meta[:name]
       @programming_language = meta[:programming_language]
       @version = meta[:version]
@@ -416,6 +420,7 @@ module Codemeta
         'disambiguatingDescription' => disambiguating_description,
         'identifier' => identifier,
         'image' => image,
+        'license' => license,
         'mainEntityOfPage' => main_entity_of_page,
         'name' => name,
         'potentialAction' => potential_action,

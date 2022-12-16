@@ -46,8 +46,12 @@ RSpec.describe Codemeta::SoftwareSourceCode do
         "email" => "serisgal@i3m.upv.es",
         "familyName" => "Risco",
         "givenName" => "Sebastián")
+      expect(subject.date_created).to eq("2018-06-15")
+      expect(subject.date_modified).to eq("2022-11-07")
+      expect(subject.date_published).to eq("2018-10-01")
       expect(subject.programming_language).to eq(["Go", "Shell", "Dockerfile"])
       expect(subject.version).to eq('2.5.2')
+      expect(subject.license).to eq("https://spdx.org/licenses/Apache-2.0")
     end
 
     it 'correctly loads ms3 codemeta' do
@@ -65,8 +69,33 @@ RSpec.describe Codemeta::SoftwareSourceCode do
         "email" => "johannes.hentschel@epfl.ch",
         "familyName" => "Hentschel",
         "givenName" => "Johannes")
+      expect(subject.date_created).to eq("2020-05-03")
+      expect(subject.date_modified).to be nil
+      expect(subject.date_published).to eq("2020-07-06")
       expect(subject.programming_language).to eq(["Python 3"])
       expect(subject.version).to be nil
+      expect(subject.license).to eq("https://spdx.org/licenses/AGPL-3.0")
+    end
+
+    it 'correctly loads uta_engine codemeta' do
+      input = "#{fixture_path}/codemeta/uta_engine_codemeta.json"
+      subject = described_class.new(input: input)
+
+      expect(subject.type).to eq('SoftwareSourceCode')
+      # expect(subject.id).to eq(2)
+      expect(subject.name).to eq("utaengine: Routing and aggregation engine for 'Urban Transport Analyst'")
+      expect(subject.code_repository).to eq("https://github.com/UrbanAnalyst/uta-engine")
+      expect(subject.author.length).to eq(1)
+      expect(subject.author.first).to eq("@type" => "Person",
+        "email" => "mark.padgham@email.com",
+        "familyName" => "Padgham",
+        "givenName" => "Mark")
+      expect(subject.date_created).to be nil
+      expect(subject.date_modified).to be nil
+      expect(subject.date_published).to be nil
+      expect(subject.programming_language).to eq("@type"=>"ComputerLanguage", "name"=>"R", "url"=>"https://r-project.org")
+      expect(subject.version).to eq("0.0.1.013")
+      expect(subject.license).to eq("https://spdx.org/licenses/GPL-3.0")
     end
     # rubocop:enable RSpec/ExampleLength
   end
