@@ -2,10 +2,10 @@
 
 module Codemeta
   module Utils
-    def read_input(input)
+    def read_json_file(input)
       if input && File.exist?(input) && %w[.json].include?(File.extname(input))
         string = File.read(input)
-        JSON.parse(string).transform_keys { |k| k.underscore.to_sym }
+        JSON.parse(string).transform_keys { |k| k.to_s.underscore }
       else
         {}
       end

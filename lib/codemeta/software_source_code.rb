@@ -18,6 +18,9 @@ module Codemeta
     # solutions, code snippet samples, scripts, templates.
     attr_reader :type
 
+    # The open standard reference for interpreting the markup contents.
+    attr_reader :context
+
     # Link to the repository where the un-compiled, human readable code
     # and related code is located (SVN, GitHub, CodePlex).
     attr_accessor :code_repository
@@ -361,6 +364,13 @@ module Codemeta
     # or official website.
     attr_accessor :same_as
 
+    # A standardized size of a product or creative work, specified either
+    # through a simple textual string (for example 'XL', '32Wx34L'), a
+    # QuantitativeValue with a unitCode, or a comprehensive and structured
+    # SizeSpecification; in other cases, the width, height, depth and weight
+    # properties may be more applicable.
+    attr_accessor :size
+
     # A CreativeWork or Event about this Thing. Inverse property: about
     attr_accessor :subject_of
 
@@ -371,34 +381,44 @@ module Codemeta
     attr_accessor :version
 
     def initialize(args = {})
-      args.transform_keys!(&:to_sym)
+      args.transform_keys! { |k| k.to_s }
 
-      if args[:input]
-        meta = read_input(args[:input]).merge(args)
-      else
-        meta = args
+      meta = if args['input']
+               read_json_file(args['input']).merge(args)
+             else
+               args
+             end
+
+      # raise error if context is other than codemeta, schema.org, or nil
+      unless ['http://schema.org', 'https://doi.org/10.5063/schema/codemeta-2.0',
+              nil].include?(meta['@context'])
+        raise ArgumentError, "Invalid context: #{meta['@context']}"
       end
 
       @type = 'SoftwareSourceCode'
-      @about = meta[:about]
-      @abstract = meta[:abstract]
-      @access_mode = meta[:access_mode]
-      @author = meta[:author]
-      @code_repository = meta[:code_repository]
-      @code_sample_type = meta[:code_sample_type]
-      @date_created = meta[:date_created]
-      @date_modified = meta[:date_modified]
-      @date_published = meta[:date_published]
-      @license = meta[:license]
-      @name = meta[:name]
-      @programming_language = meta[:programming_language]
-      @version = meta[:version]
+      @context = 'http://schema.org'
+      @about = meta['about']
+      @abstract = meta['abstract']
+      @access_mode = meta['access_mode']
+      @author = meta['author']
+      @code_repository = meta['code_repository']
+      @code_sample_type = meta['code_sample_type']
+      @date_created = meta['date_created']
+      @date_modified = meta['date_modified']
+      @date_published = meta['date_published']
+      @description = meta['description']
+      @license = meta['license']
+      @name = meta['name']
+      @programming_language = meta['programming_language']
+      @size = meta['size']
+      @version = meta['version']
     end
 
     # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def to_json_struct
       {
         '@type' => type,
+        '@context' => context,
         'codeRepository' => code_repository,
         'codeSampleType' => code_sample_type,
         'programmingLanguage' => programming_language,
@@ -425,9 +445,10 @@ module Codemeta
         'name' => name,
         'potentialAction' => potential_action,
         'sameAs' => same_as,
+        'size' => size,
         'subject_of' => subject_of,
         'url' => url,
-        'version' => version,
+        'version' => version
       }.compact
     end
     # rubocop:enable Metrics/ClassLength, Metrics/MethodLength, Metrics/AbcSize
